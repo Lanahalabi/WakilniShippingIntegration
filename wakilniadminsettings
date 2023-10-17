@@ -1,0 +1,36 @@
+<?php
+class Wakilni_Settings_Page {
+    
+    public function __construct() {
+        add_action('admin_menu', array($this, 'wakilni_plugin_create_menu'));
+    }
+    
+    public function wakilni_plugin_create_menu() {
+        add_menu_page('Wakilni Settings', 'Wakilni Settings', 'administrator', __FILE__, array($this, 'wakilni_settings_page'));
+    }
+    
+    public function wakilni_settings_page() {
+        ?>
+        <div class="wrap">
+            <h1>Wakilni Shipping Integration Settings</h1>
+            
+            <form method="post" action="options.php">
+                <?php settings_fields('wakilni-settings-group'); ?>
+                <?php do_settings_sections('wakilni-settings-group'); ?>
+                <table class="form-table">
+                    <tr valign="top">
+                        <th scope="row">API URL</th>
+                        <td><input type="text" name="wakilni_api_url" value="<?php echo esc_attr(get_option('wakilni_api_url')); ?>" /></td>
+                    </tr>
+                    <tr valign="top">
+                        <th scope="row">API Key</th>
+                        <td><input type="text" name="wakilni_api_key" value="<?php echo esc_attr(get_option('wakilni_api_key')); ?>" /></td>
+                    </tr>
+                </table>
+                <?php submit_button(); ?>
+            </form>
+        </div>
+        <?php
+    }
+}
+?>
