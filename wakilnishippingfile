@@ -10,7 +10,29 @@ class Wakilni_Shipping {
         $api_url = get_option('wakilni_api_url');
         $api_key = get_option('wakilni_api_key');
         
-        // Your code to send order details to Wakilni API...
+        // Prepare order details
+        $order_data = array(
+            // Add necessary order details here...
+        );
+        
+        $response = wp_safe_remote_post($api_url, array(
+            'body' => json_encode($order_data),
+            'headers' => array(
+                'Authorization' => 'Bearer ' . $api_key,
+                'Content-Type' => 'application/json'
+            )
+        ));
+        
+        // Handle the response or error accordingly
+        if (is_wp_error($response)) {
+            // Handle error
+            $error_message = $response->get_error_message();
+            // You may log the error or display it as per your requirement
+        } else {
+            $body = wp_remote_retrieve_body($response);
+            $data = json_decode($body);
+            // Handle the API response, update the order details or perform other actions
+        }
     }
 }
 ?>
