@@ -12,26 +12,27 @@ class Wakilni_Shipping {
         
         // Prepare order details
         $order_data = array(
-            // Add necessary order details here...
+            // Populate the necessary order details here...
         );
         
         $response = wp_safe_remote_post($api_url, array(
-            'body' => json_encode($order_data),
-            'headers' => array(
+            'method'    => 'POST',
+            'body'      => json_encode($order_data),
+            'headers'   => array(
                 'Authorization' => 'Bearer ' . $api_key,
-                'Content-Type' => 'application/json'
+                'Content-Type'  => 'application/json'
             )
         ));
         
         // Handle the response or error accordingly
         if (is_wp_error($response)) {
-            // Handle error
+            // Handle the error, log it or notify as per your requirement
             $error_message = $response->get_error_message();
-            // You may log the error or display it as per your requirement
+            // Log or display the error as per your needs
         } else {
             $body = wp_remote_retrieve_body($response);
             $data = json_decode($body);
-            // Handle the API response, update the order details or perform other actions
+            // Handle the API response, such as saving the tracking information
         }
     }
 }
