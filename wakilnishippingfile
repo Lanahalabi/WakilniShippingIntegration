@@ -1,0 +1,16 @@
+<?php
+class Wakilni_Shipping {
+    
+    public function __construct() {
+        add_action('woocommerce_thankyou', array($this, 'send_order_to_wakilni'));
+    }
+    
+    public function send_order_to_wakilni($order_id) {
+        $order = wc_get_order($order_id);
+        $api_url = get_option('wakilni_api_url');
+        $api_key = get_option('wakilni_api_key');
+        
+        // Your code to send order details to Wakilni API...
+    }
+}
+?>
