@@ -1,0 +1,11 @@
+add_action('woocommerce_view_order', 'display_wakilni_tracking_info');
+
+function display_wakilni_tracking_info($order_id) {
+    $order = wc_get_order($order_id);
+    $tracking_info = get_post_meta($order_id, '_wakilni_tracking_info', true);
+    
+    if ($tracking_info) {
+        echo '<h2>' . __('Wakilni Tracking Information') . '</h2>';
+        echo '<p>' . esc_html($tracking_info) . '</p>';
+    }
+}
